@@ -3,9 +3,9 @@
 # A wrapper for ssh
 
 # Set specific bgcolor
-perhostcolor.sh $@
+~/bin/perhostcolor/perhostcolor.sh $@
 # ssh to ...
 /usr/bin/ssh $@
 # Reset to original bgcolor
-perhostcolor.sh
+~/bin/perhostcolor/perhostcolor.sh
 

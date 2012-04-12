@@ -7,25 +7,35 @@
 # This script can be used in an alias
 # TODO : could use ssh config, known host, etc
 
-declare -a colors
-
-# color palette
-#colors=( 222222 222230 302222 223022 303022 302230 223030 )
-
-# greyscale palette
-colors=( 222222 111111 333333 444444 111111 333333)
-
-# ugly hack to enable usage of "perhostcolor $@" in aliases/script
-input=`echo $@`
-choice=${#input}
 
 
-max=${#colors[@]}
-while [ $choice -ge $max ] ; do
-	choice=$(( choice - $max ))
-done
+case "$@" in
+	brix*) resultingcolor=222230
+		;;
+	homer*) resultingcolor=303022
+		;;
+	*) declare -a colors
 
-resultingcolor=${colors[$choice]}
+		# color palette
+		colors=( 000000 222222 222230 302222 223022 303022 302230 223030 )
+
+		# greyscale palette
+		#colors=( 222222 111111 333333 444444 111111 333333)
+
+		# ugly hack to enable usage of "perhostcolor $@" in aliases/script
+		input=`echo $@`
+		choice=${#input}
+
+
+		max=${#colors[@]}
+		while [ $choice -ge $max ] ; do
+			choice=$(( choice - $max ))
+		done
+
+
+		resultingcolor=${colors[$choice]}
+				;;
+esac
 
 # rxvt /xterm escape sequence 
 printf "\e]49;#$resultingcolor\a"
